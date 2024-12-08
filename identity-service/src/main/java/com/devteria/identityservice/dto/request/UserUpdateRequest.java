@@ -1,20 +1,25 @@
 package com.devteria.identityservice.dto.request;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
+import java.util.List;
 
-@Getter
-@Setter
+import com.devteria.identityservice.validator.DobConstraint;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
+    String password;
+    String firstName;
+    String lastName;
 
-    private String password;
+    @DobConstraint(min = 18, message = "INVALID_DOB")
+    LocalDate dob;
 
-    private String firstName;
-
-    private String lastName;
-
-    private LocalDate dob;
-
+    List<String> roles;
 }
